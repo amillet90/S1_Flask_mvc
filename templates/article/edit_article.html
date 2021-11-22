@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier un article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>modifier d'un article</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <form method="post" action="/article/edit" {#action="{{ url_for('valid_edit_article') }}#}>
+    <fieldset>
+        <legend> Modifier un article</legend>
+        <input type="hidden" name="id" size="18" value="{{ article.id }}" id="id">
+
+        <label for="nom">nom</label><br>
+        <input id="nom" type="text" name="nom" size="18" value="{{ article.nom }}" placeholder="Saisir le nom de l'article"><br>
+        <!-- <label for="type_article_id">id type de l'article</label><br>
+        <input id="type_article_id" type="text" name="type_article_id" size="18" value="{{ article.type_article_id }}" placeholder="Saisir l'id du type de l'article"><br>
+        --><br>
+        <label for="type_article_id">type de l'article</label>
+        <select name="type_article_id" required>
+            {% for type in types_articles %}
+            <option value="{{ type.id }}"
+                    {% if article.type_article_id is defined and type.id ==  article.type_article_id %}selected{% endif %}
+            > {{ type.libelle }} </option>
+            {% endfor %}
+        </select><br>
+
+        <label for="prix">prix de l'article</label><br>
+        <input id="prix" type="number" step="0.01" required name="prix" size="18" value="{{ article.prix }}" placeholder="Saisir le prix de l'article"><br>
+        <label for="stock">stock</label><br>
+        <input id="stock" type="number"  required name="stock" size="18" value="{{ article.stock }}" placeholder="Saisir le stock"><br>
+        <label for="description">description</label><br>
+        <input id="description" type="text" name="description" size="18" value="{{ article.description }}" placeholder="Saisir la description"><br>
+        <label for="image">image</label><br>
+        <input id="image" type="text" name="image" size="18" value="{{ article.image }}" placeholder="Saisir le nom de l'image de l'article"><br>
+
+{#        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
+        <input type="submit" value="Modifier" name="Valider" >
+    </fieldset>
+  </form>
+{% endblock %}

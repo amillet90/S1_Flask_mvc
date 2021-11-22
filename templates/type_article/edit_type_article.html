@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier un type d'article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>modifier un type d'article</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <form method="post" action="{{ url_for('admin_type_article.valid_edit_type_article') }}">
+    <fieldset>
+        <legend> Modifier un type d'article</legend>
+        <input type="hidden" name="id" size="18" value="{{ type_article.id }}" id="id">
+        <label for="libelle">libelle</label><br>
+        <input type="text" name="libelle" size="18" value="{{ type_article.libelle }}" id="libelle"><br>
+        <input type="submit" value="Modifier" name="Modifier" >
+{#        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
+    </fieldset>
+  </form>
+{% endblock %}
